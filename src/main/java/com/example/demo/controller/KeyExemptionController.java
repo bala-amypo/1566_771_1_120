@@ -1,26 +1,11 @@
-package com.example.demo.controller;
+@PostMapping("/{apiKey}")
+public ResponseEntity<String> add(@PathVariable String apiKey) {
+    service.addExemption(apiKey);
+    return ResponseEntity.ok("Exemption added");
+}
 
-import com.example.demo.entity.KeyExemption;
-import com.example.demo.service.KeyExemptionService;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
-@RequestMapping("/exemption")
-public class KeyExemptionController {
-
-    private final KeyExemptionService service;
-
-    public KeyExemptionController(KeyExemptionService service) {
-        this.service = service;
-    }
-
-    @PostMapping("/add")
-    public KeyExemption add(@RequestParam String apiKey) {
-        return service.addExemption(apiKey);
-    }
-
-    @DeleteMapping("/remove/{apiKey}")
-    public void remove(@PathVariable String apiKey) {
-        service.removeExemption(apiKey);
-    }
+@DeleteMapping("/{apiKey}")
+public ResponseEntity<String> remove(@PathVariable String apiKey) {
+    service.removeExemption(apiKey);
+    return ResponseEntity.ok("Exemption removed");
 }
