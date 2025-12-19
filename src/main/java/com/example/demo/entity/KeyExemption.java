@@ -1,5 +1,19 @@
-package com.example.demo.service;
+package com.example.demo.entity;
 
-public interface KeyExemptionService {
-    boolean isExempted(String apiKey);
+import jakarta.persistence.*;
+
+@Entity
+public class KeyExemption {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(unique = true)
+    private String apiKey;
+
+    public Long getId() { return id; }
+    public String getApiKey() { return apiKey; }
+
+    public void setApiKey(String apiKey) { this.apiKey = apiKey; }
 }
