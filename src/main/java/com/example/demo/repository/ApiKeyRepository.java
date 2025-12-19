@@ -1,39 +1,10 @@
-package com.example.demo.service.impl;
+package com.example.demo.repository;
 
 import com.example.demo.entity.ApiKey;
-import com.example.demo.entity.UserAccount;
-import com.example.demo.repository.ApiKeyRepository;
-import com.example.demo.repository.UserAccountRepository;
-import com.example.demo.service.ApiKeyService;
-import org.springframework.stereotype.Service;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.UUID;
+import java.util.Optional;
 
-@Service
-public class ApiKeyServiceImpl implements ApiKeyService {
-
-    private final ApiKeyRepository apiKeyRepository;
-    private final UserAccountRepository userRepo;
-
-    public ApiKeyServiceImpl(ApiKeyRepository apiKeyRepository,
-                             UserAccountRepository userRepo) {
-        this.apiKeyRepository = apiKeyRepository;
-        this.userRepo = userRepo;
-    }
-
-    @Override
-    public ApiKey createApiKey(Long userId) {
-        UserAccount user = userRepo.findById(userId).orElseThrow();
-
-        ApiKey key = new ApiKey();
-        key.setApiKey(UUID.randomUUID().toString());
-        key.setUser(user);
-
-        return apiKeyRepository.save(key);
-    }
-
-    @Override
-    public ApiKey getApiKey(String apiKey) {
-        return apiKeyRepository.findByApiKey(apiKey).orElseThrow();
-    }
+public interface ApiKeyRepository extends JpaRepository<ApiKey, Long> {
+    Optional<ApiKey> findByApiKey(String apiKey);
 }
