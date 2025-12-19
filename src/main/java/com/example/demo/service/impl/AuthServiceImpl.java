@@ -2,11 +2,10 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.UserAccount;
 import com.example.demo.repository.UserAccountRepository;
-import com.example.demo.service.AutoService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthServiceImpl implements AutoService {
+public class AuthServiceImpl {
 
     private final UserAccountRepository repository;
 
@@ -14,7 +13,6 @@ public class AuthServiceImpl implements AutoService {
         this.repository = repository;
     }
 
-    @Override
     public UserAccount register(String username, String password) {
         UserAccount user = new UserAccount();
         user.setUsername(username);
