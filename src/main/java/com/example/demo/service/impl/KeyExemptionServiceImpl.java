@@ -27,4 +27,9 @@ public class KeyExemptionServiceImpl implements KeyExemptionService {
     public void removeExemption(String apiKey) {
         repository.deleteByApiKey(apiKey);
     }
+
+    @Override
+    public boolean isExempted(String apiKey) {
+        return repository.existsByApiKey(apiKey);
+    }
 }
