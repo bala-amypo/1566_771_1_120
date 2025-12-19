@@ -1,23 +1,21 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.ApiUsageLog;
-import com.example.demo.service.ApiUsageLogService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import com.example.demo.service.ApiUsageLogService;
 
 @RestController
-@RequestMapping("/usage")
+@RequestMapping("/api/usage")
 public class ApiUsageLogController {
 
-    private final ApiUsageLogService service;
+    private final ApiUsageLogService apiUsageLogService;
 
-    public ApiUsageLogController(ApiUsageLogService service) {
-        this.service = service;
+    public ApiUsageLogController(ApiUsageLogService apiUsageLogService) {
+        this.apiUsageLogService = apiUsageLogService;
     }
 
-    @GetMapping("/{apiKey}")
-    public List<ApiUsageLog> getLogs(@PathVariable String apiKey) {
-        return service.getLogs(apiKey);
+    @PostMapping("/{apiKey}")
+    public String log(@PathVariable String apiKey) {
+        apiUsageLogService.logUsage(apiKey);
+        return "Logged";
     }
 }
