@@ -2,6 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.entity.UserAccount;
 
-public interface AutoService {
+public interface AuthService {
     UserAccount register(String username, String password);
 }
