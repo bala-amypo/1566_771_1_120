@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
 public interface KeyExemptionService {
-    boolean isExempted(String apiKey);
+    void addExemption(String apiKey);
+    void removeExemption(String apiKey);
 }
