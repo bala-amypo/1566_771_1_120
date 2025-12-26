@@ -1,10 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.RateLimitEnforcement;
 import com.example.demo.service.RateLimitEnforcementService;
+
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/ratelimit")
+@RequestMapping("/api/enforcements")
 public class RateLimitEnforcementController {
 
     private final RateLimitEnforcementService service;
@@ -13,9 +17,18 @@ public class RateLimitEnforcementController {
         this.service = service;
     }
 
-    @GetMapping("/check")
-    public String check(@RequestHeader("X-API-KEY") String apiKey) {
-        service.validate(apiKey);
-        return "ALLOWED";
+    @PostMapping
+    public RateLimitEnforcement create(@RequestBody RateLimitEnforcement e) {
+        return service.createEnforcement(e);
+    }
+
+    @GetMapping("/{id}")
+    public RateLimitEnforcement getById(@PathVariable Long id) {
+        return service.getEnforcementById(id);
+    }
+
+    @GetMapping("/key/{keyId}")
+    public List<RateLimitEnforcement> getForKey(@PathVariable Long keyId) {
+        return service.getEnforcementsForKey(keyId);
     }
 }
