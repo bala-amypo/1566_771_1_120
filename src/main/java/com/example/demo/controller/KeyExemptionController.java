@@ -13,27 +13,28 @@ public class KeyExemptionController {
 
     private final KeyExemptionService service;
 
-    public KeyExemptionController(KeyExemptionService service) {
-        this.service = service;
-    }
+        public KeyExemptionController(KeyExemptionService service) {
+                this.service = service;
+                    }
 
-    @PostMapping
-    public KeyExemption create(@RequestBody KeyExemption e) {
-        return service.createExemption(e);
-    }
+                        @PostMapping
+                            public KeyExemption create(@RequestBody KeyExemption e) {
+                                    return service.createExemption(e);
+                                        }
 
-    @PutMapping("/{id}")
-    public KeyExemption update(@PathVariable Long id, @RequestBody KeyExemption e) {
-        return service.updateExemption(id, e);
-    }
+                                            @PutMapping("/{id}")
+                                                public KeyExemption update(@PathVariable Long id, @RequestBody KeyExemption e) {
+                                                        return service.updateExemption(id, e);
+                                                            }
 
-    @GetMapping("/key/{keyId}")
-    public KeyExemption getByKey(@PathVariable Long keyId) {
-        return service.getExemptionByKey(keyId);
-    }
+                                                                @GetMapping("/key/{keyId}")
+                                                                    public KeyExemption getByKey(@PathVariable Long keyId) {
+                                                                            return service.getExemptionByKey(keyId);
+                                                                                }
 
-    @GetMapping
-    public List<KeyExemption> getAll() {
-        return service.getAllExemptions();
-    }
-}
+                                                                                    @GetMapping
+                                                                                        public List<KeyExemption> getAll() {
+                                                                                                return service.getAllExemptions();
+                                                                                                    }
+                                                                                                    }
+                                                                                                    
