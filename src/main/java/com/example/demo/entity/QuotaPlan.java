@@ -3,19 +3,48 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "quota_plans")
 public class QuotaPlan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private int dailyLimit;
+    private String planName;
+    private Integer dailyLimit;
+    private boolean active = true;
 
-    public Long getId() { return id; }
-    public String getName() { return name; }
-    public int getDailyLimit() { return dailyLimit; }
+    public QuotaPlan() {}
 
-    public void setName(String name) { this.name = name; }
-    public void setDailyLimit(int dailyLimit) { this.dailyLimit = dailyLimit; }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {      // ✅ REQUIRED BY TESTS
+        this.id = id;
+    }
+
+    public String getPlanName() {
+        return planName;
+    }
+
+    public void setPlanName(String planName) {
+        this.planName = planName;
+    }
+
+    public Integer getDailyLimit() {
+        return dailyLimit;
+    }
+
+    public void setDailyLimit(Integer dailyLimit) {
+        this.dailyLimit = dailyLimit;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

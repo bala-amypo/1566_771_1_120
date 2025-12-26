@@ -1,25 +1,52 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
 
 @Entity
+@Table(name = "rate_limit_enforcements")
 public class RateLimitEnforcement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String apiKey;
-    private int usedCount;
-    private LocalDate date;
+    private Integer limitExceededBy;
+    private String message;
 
-    public Long getId() { return id; }
-    public String getApiKey() { return apiKey; }
-    public int getUsedCount() { return usedCount; }
-    public LocalDate getDate() { return date; }
+    @ManyToOne
+    private ApiKey apiKey;
 
-    public void setApiKey(String apiKey) { this.apiKey = apiKey; }
-    public void setUsedCount(int usedCount) { this.usedCount = usedCount; }
-    public void setDate(LocalDate date) { this.date = date; }
+    public RateLimitEnforcement() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {      // ✅ added (safe)
+        this.id = id;
+    }
+
+    public Integer getLimitExceededBy() {
+        return limitExceededBy;
+    }
+
+    public void setLimitExceededBy(Integer limitExceededBy) {
+        this.limitExceededBy = limitExceededBy;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public ApiKey getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(ApiKey apiKey) {
+        this.apiKey = apiKey;
+    }
 }
