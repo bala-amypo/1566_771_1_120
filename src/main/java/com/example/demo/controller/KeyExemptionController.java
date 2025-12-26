@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.KeyExemption;
 import com.example.demo.service.KeyExemptionService;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/exemptions")
+@RequestMapping("/api/key-exemptions")
 public class KeyExemptionController {
 
     private final KeyExemptionService service;
@@ -14,15 +17,23 @@ public class KeyExemptionController {
         this.service = service;
     }
 
-    @PostMapping("/{apiKey}")
-    public ResponseEntity<String> add(@PathVariable String apiKey) {
-        service.addExemption(apiKey);
-        return ResponseEntity.ok("Exemption added");
+    @PostMapping
+    public KeyExemption create(@RequestBody KeyExemption e) {
+        return service.createExemption(e);
     }
 
-    @DeleteMapping("/{apiKey}")
-    public ResponseEntity<String> remove(@PathVariable String apiKey) {
-        service.removeExemption(apiKey);
-        return ResponseEntity.ok("Exemption removed");
+    @PutMapping("/{id}")
+    public KeyExemption update(@PathVariable Long id, @RequestBody KeyExemption e) {
+        return service.updateExemption(id, e);
+    }
+
+    @GetMapping("/key/{keyId}")
+    public KeyExemption getByKey(@PathVariable Long keyId) {
+        return service.getExemptionByKey(keyId);
+    }
+
+    @GetMapping
+    public List<KeyExemption> getAll() {
+        return service.getAllExemptions();
     }
 }
